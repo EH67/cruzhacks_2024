@@ -27,4 +27,13 @@ def test_upload_event():
         res = requests.post(req_url, data=infile)
         print(res.text)
 
-test_upload_event()
+def test_query_event():
+    req_url = f'{url}/QueryEvent'
+    req_json = {
+        'club_or_affiliation': ['Taiwanese Student Association (TSA)', "African Caribbean People's Coalition", 'abc']
+    }
+    res = requests.post(req_url, json=req_json)
+    return res
+
+api_call = test_query_event()
+print(f'response is {api_call.text}')
