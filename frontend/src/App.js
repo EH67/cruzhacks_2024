@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/** For each path we have, add a Route tag to define which element to render depending on the path. */}
-          <Route path="/" element={ <EventPage/> }></Route>
+          <Route path="/" element={ <BoardPage/> }></Route>
           <Route path="/ClubPage" element={ <ClubPage/> }></Route>
           <Route path="/EventPage" element={ <EventPage/> }></Route>
           <Route path="/BoardPage" element={ <BoardPage/> }></Route>

@@ -4,6 +4,7 @@ import ImageUpload from '../../../components/ImageUpload/ImageUpload';
 import DropDown from '../../../components/DropDown/DropDown';
 import config from '../../../config';
 import './Event.css';
+import Popup from '../../../components/Popup/Popup';
 
 const apiUrl = config.apiUrl;
 
@@ -105,6 +106,16 @@ const Event = ({uuid}) => {
     }
   };
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleOpenPopup = () => {
+    setIsPopupOpen(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -119,10 +130,28 @@ const Event = ({uuid}) => {
         //     ...prevData,
         //     filename: getImg.name,
         // }))
+        setIsPopupOpen(false);
         return alert('empty image');
       };
 
+      if (formData === null) {
+        setIsPopupOpen(false);
+        return alert('No form data');
+      }
+
+      if (formData['eventname'] === '') {
+        setIsPopupOpen(false);
+        return alert('No event name given');
+      }
+
+      if (formData['date'] === '') {
+        setIsPopupOpen(false);
+        return alert('No date given');
+      }
+
       uploadFile(getImg);
+
+      // handleOpenPopup();
 
       // Convert form data to JSON
       // const jsonData = JSON.stringify(formData);
@@ -143,7 +172,7 @@ const Event = ({uuid}) => {
       console.log('API Response:', response.data);
 
       
-      window.location.href = '/BoardPage';
+      
     } catch (error) {
       console.error('Error sending data to API:', error);
     }
@@ -218,7 +247,12 @@ const Event = ({uuid}) => {
           </div>
           <br />
           <div className="">
-            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#003E70' }}>Submit</button>
+            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#003E70' }} onClick={handleOpenPopup}>Submit</button>
+            {isPopupOpen && (
+              <Popup onClose={handleClosePopup}>
+                <p>This is the content of the popup.</p>
+              </Popup>
+            )}
           </div>
         </div>
 

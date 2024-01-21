@@ -17,6 +17,8 @@ export default class EventPage extends React.Component { // replace "EventPage" 
 
   
 
+  
+
   render() {
     return (
     <div className="cards container text-lefts px-9 mx-24">
