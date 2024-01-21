@@ -3,6 +3,7 @@ import axios from 'axios';
 import ImageUpload from '../../../components/ImageUpload/ImageUpload';
 import DropDown from '../../../components/DropDown/DropDown';
 import config from '../../../config';
+import './Event.css';
 
 const apiUrl = config.apiUrl;
 
@@ -174,19 +175,19 @@ const Event = ({uuid}) => {
         <div className="col-md-6 text-left">
           
           <div className="form-group">  
-            <label>Event Name</label>
+            <label className="required">Event Name</label>
             <br />
             <input type="text" name="eventname" value={formData.eventname} onChange={handleChange} />
           </div>  
           
           <div className="form-group">
-            <label>Date</label>
+            <label className="required">Date</label>
             <br />
             <input type="text" name="date" value={formData.date} onChange={handleDateChange} />
           </div>
           
           <div className="form-group">
-            <label>Location</label>
+            <label className="required">Location</label>
             <br />
             <input type="text" name="location" value={formData.location} onChange={handleChange} />
           </div>

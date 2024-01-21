@@ -8,7 +8,7 @@ import './BoardPage.css';
 
 const BoardPage = () => {
   const [jsonData, setJsonData] = useState();
-  const [eventNames, setEventNames] = useState();
+  // const [eventNames, setEventNames] = useState();
   
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +48,7 @@ const BoardPage = () => {
       <div className="sticky-top rounded-30 py-0 py-lg-1" style={{ backgroundColor: '#003E70' }} >
         <div className="container rounded-30">
 
+          {/* row1 */}
           <div className="row d-flex align-items-center rounded-10">
             <div className="col float-right pl-5">
               <img src="/slug_logo.png" className="logo-img" height="150px" alt="Slug Logo"></img>
@@ -59,10 +60,13 @@ const BoardPage = () => {
               <Link to="/EventPage" className="btn btn-light">Add Event</Link>
             </div>
           </div>
+
+          {/* row2 */}
+          <div className="row text-center"></div>
           <div className="row text-center">
-            <p>Slugs for the fun! Stay up to date on upcoming events!</p>
+            <span className="p1 text-center text-light title-name" >Slugs for the fun! Stay up to date on upcoming events!</span>
           </div>
-          
+          <div className="row text-center"></div>
         </div>
       </div>
 

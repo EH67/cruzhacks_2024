@@ -36,7 +36,10 @@ export default class EventPage extends React.Component { // replace "EventPage" 
               {/* <CheckBox/> */}
             </div>
             {/* <Link to="/BoardPage">GO BACK TO SLUG BOARD</Link> */}
-            <Link to="/BoardPage" className="btn btn-light">BACK TO BOARD</Link>
+            <Link to="/BoardPage" className="btn btn-light">
+              <i className="fas fa-arrow-left ml-2"></i>
+              Return to SlugsBoard
+            </Link>
             {/* <HomeButton/> */}
           </div>
         </div>
