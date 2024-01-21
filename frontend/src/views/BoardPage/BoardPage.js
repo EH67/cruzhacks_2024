@@ -56,7 +56,7 @@ const BoardPage = () => {
           <span className="h1 ml-2 text-light" font-family="Kreon">Slug Board</span>
           {/* Right button */}
           <div className="ml-auto p-5">
-            <Link to="/EventPage" className="btn btn-light">Add New Event</Link>
+            <Link to="/EventPage" className="btn btn-primary" style={{ backgroundColor: '#003E70' }}>Add New Event</Link>
           </div>
         </div>
       </nav>
