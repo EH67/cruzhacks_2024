@@ -22,7 +22,7 @@ const Flyer = ({uuid, data}) => {
     <div>
       
       {/* <ImageComponent uuid={hardcoded_json.uuid}/> */}
-      <ImageComponent uuid={uuid}/>
+      <ImageComponent uuid={uuid} flyer={data.flyer}/>
     </div>
   );
 };

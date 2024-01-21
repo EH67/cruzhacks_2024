@@ -49,12 +49,13 @@ const BoardPage = () => {
         <div className="container" style={{ backgroundColor: '#003E70' }}>
 
           <div className="row d-flex align-items-center" >
-            <div className="col-sm float-right">
+            <div className="col float-right">
               <img src="/slug_logo.png" className="logo-img" height="150px" alt="Slug Logo"></img>
             </div>
-            <div className="col-sm float-left">
+            <div className="col float-center">
               <span className="h1 ml-2 text-left text-light">Slug Board</span>
             </div>
+            <div className="col"></div>
           </div>
           
         </div>

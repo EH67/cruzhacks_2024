@@ -9,7 +9,7 @@ const apiUrl = config.apiUrl;
 // ));
 
 
-const ImageComponent = React.memo(({uuid}) => {
+const ImageComponent = React.memo(({uuid, flyer}) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
@@ -18,12 +18,20 @@ const ImageComponent = React.memo(({uuid}) => {
         console.log(`uuid is ${uuid}`);
         console.log(uuid);
         console.log("use effect called in ImageComponent");
-        const response = await fetch(`http://localhost:8080/FetchImage/${uuid}`);
-        const blob = await response.blob();
+        let url;
+        if (flyer.startsWith("gs")) {
+          const response = await fetch(`http://localhost:8080/FetchImage/${uuid}`);
+          const blob = await response.blob();
+  
+          // Create a data URL from the blob
+          url = URL.createObjectURL(blob);
+        } else {
+          url = flyer;
+        }
 
-        // Create a data URL from the blob
-        const url = URL.createObjectURL(blob);
+        // if statement end
         setImageUrl(url);
+
       } catch (error) {
         console.error('Error fetching image:', error);
       }
