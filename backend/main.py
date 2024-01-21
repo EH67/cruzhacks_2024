@@ -176,24 +176,26 @@ def query_event_post():
     data = request.get_json(force=True)
     clubs_ref = firestore.client().collection('events')
     selected = []
-    # strs = []
-    count = 0
-    # return data  # returns key:value pair 'club_or_affiliation': tsa, acpc, abc
-    print('before entering for loop')
-    for club in data:
-        # return club  # returns 'club_or_affiliation'
-        query = clubs_ref.where('club_or_affiliation', '==', 'club_or_affiliation').get()
-        return f"query is {query}"
-        # strs = [str(item)
-        for event in query:
-            count += 1
-            print(f'Number of times in loop: {count}')
-            selected.append(event)  # check
+    data_dict = {}
 
+    print('before entering for loop')
+    for club in data['club_or_affiliation']:
+        print(f'club is {club}')
+        query = clubs_ref.where('club_or_affiliation', '==', club).get()
+        print(f"query is {query}")
+        for event in query:
+            # print(f"event is of type {type(event.id)}")
+            selected.append(event.id)  # check
+            # print("\n")
+            snapshot_data = event.to_dict()
+            # print(f'snapshot_data: {snapshot_data}')
+            data_dict[event.id] = snapshot_data
+            # print(f'dictionary entry: {temp}')
+    
     if not selected:
         return f'query: {type(query)} - none found'
             
-    return {'selected_events': selected}, 200 #response 
+    return data_dict, 200 #response 
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

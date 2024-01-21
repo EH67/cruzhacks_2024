@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types"; 
 import './EventPage.css'; // replace "EventPage" with your own component
 import Event from './Event/Event';
+import CheckBox from '../../components/CheckBox/CheckBox';
 
 export default class EventPage extends React.Component { // replace "EventPage" with your own component
   static propTypes = { // define any props here
@@ -20,7 +21,10 @@ export default class EventPage extends React.Component { // replace "EventPage" 
         </form> */}
         <div>
           <h1>New Event</h1>
-          <div><Event/></div>
+          <div>
+            <Event/>
+            {/* <CheckBox/> */}
+          </div>
         </div>
     </div>
     );
