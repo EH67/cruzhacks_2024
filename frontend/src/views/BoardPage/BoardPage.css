@@ -14,4 +14,15 @@
         height: 10px;
     }
   }
+
+  .all-flyers-div {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Adjust column width as needed */
+    gap: 2em; /* Adjust the gap between items as needed */
+  }
+
+  .flyer-div {
+    border: 1px solid #ddd; /* Optional: Add a border for each item */
+    padding: 2em; /* Adjust padding as needed */
+  }
   

@@ -3,6 +3,7 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import slug_logo from '../../images/slug_logo.svg';
 import {Link} from 'react-router-dom';
+import './BoardPage.css';
 
 
 const BoardPage = () => {
@@ -55,22 +56,23 @@ const BoardPage = () => {
             <div className="col float-center">
               <span className="h1 ml-2 text-left text-light">Slug Board</span>
             </div>
-            <div className="col"></div>
+            <div className="col float-right text-end">
+              <Link to="/EventPage">ADD NEW EVENT</Link>
+            </div>
           </div>
           
         </div>
       </div>
 
       {/* thick padding on left and right */}
-      <div>
+      <div className="all-flyers-div">
         { jsonData && Object.entries(jsonData).map(([uuid, entry]) => (
           // <Flyer key={uuid} data={{uuid, ...entry}} />
-          <Flyer key={uuid} uuid={uuid} data={entry}/>
+          <Flyer className="flyer-div" key={uuid} uuid={uuid} data={entry}/>
 
         )) }
       </div>
       <div>
-        <Link to="/EventPage">ADD NEW EVENT</Link>
           
       </div>
       {/* Add your content for the Board component */}
