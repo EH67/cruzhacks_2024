@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import EventPage from './views/EventPage/EventPage';
 import ClubPage from './views/ClubPage/ClubPage';
-
+import BoardPage from './views/BoardPage/BoardPage';
 function App() {
   return (
     <div className="App">
@@ -15,7 +15,7 @@ function App() {
           <Route path="/" element={ <EventPage/> }></Route>
           <Route path="/ClubPage" element={ <ClubPage/> }></Route>
           <Route path="/EventPage" element={ <EventPage/> }></Route>
-          
+          <Route path="/BoardPage" element={ <BoardPage/> }></Route>
         </Routes>
       </BrowserRouter>
 

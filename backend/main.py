@@ -95,13 +95,21 @@ def get_all_document_names(collection_name):
 
     return document_names
 
+def get_all_documents(collection_name):
+    # Reference to the collection
+    collection_ref = db.collection(collection_name)
+
+    # Get all documents in the collection
+    documents = collection_ref.get()
+
+    # Extract document names
+    # document_names = [doc.id for doc in documents]e\
+    documents_json = {x.id: x.to_dict() for x in documents}
+    return documents_json
+
 @app.route('/')
 def hello_world():
     return jsonify(message='Hello, World!')
-
-@app.route('/AllEvents', methods=['GET'])
-def all_events_get():
-    pass
 
 @app.route('/UploadEventJson/<uuid>', methods=['POST'])
 def upload_event_json_post(uuid):
@@ -117,7 +125,7 @@ def upload_event_json_post(uuid):
             res_json['tags'] = data['tags']
 
         # add the rest of the columns if they don't exist yet
-        columns = ['club_or_affiliation', 'eventname', 'date', 'time', 'flyer', 'social_link', 'location']
+        columns = ['club_or_affiliation', 'eventname', 'date', 'time', 'flyer', 'social_link', 'location', 'type', 'filename']
         for col in columns:
             if col not in data:
                 res_json[col] = None
@@ -125,10 +133,11 @@ def upload_event_json_post(uuid):
                 res_json[col] = data[col]
 
         # assemble flyer link
-        if 'file' not in data:
-            flyer = f'gs://{bucket_name}/{uuid}.png'
-        else:
-            flyer = f'gs://{bucket_name}/{data["file"]}'
+        # if 'filename' not in data:
+        #     flyer = f'gs://{bucket_name}/{uuid}.png'
+        # else:
+        #     flyer = f'gs://{bucket_name}/{data["filename"]}'
+        flyer = f'gs://{bucket_name}/{uuid}.png'
         res_json['flyer'] = flyer
 
         # TODO upload to firebase (uuid as the document)
@@ -143,7 +152,7 @@ def upload_event_json_post(uuid):
 
 @app.route('/FetchImage/<uuid>', methods=['GET'])
 def fetch_image_json_get(uuid):
-    img_bytes = get_image_bytes(bucket_name, f'{uuid}.img')
+    img_bytes = get_image_bytes(bucket_name, f'{uuid}.png')
     # res = send_file(img_bytes, mimetype='image/png')
     # print(res)
     # return res, 200
@@ -173,6 +182,16 @@ def all_clubs_get():
     club_names = get_all_document_names('clubs')
     print(f'club_names are {club_names}')
     return {'clubs': club_names}, 200
+
+@app.route('/AllEvents', methods=['GET'])
+def all_events_get():
+    events = get_all_documents('events')
+    return events, 200
+
+@app.route('/AllEventNames', methods=['GET'])
+def all_event_names_get():
+    event_names = get_all_document_names('events')
+    return {'events': event_names}
 
 @app.route('/QueryEvent', methods=['POST'])
 def query_event_post():

@@ -1,6 +1,6 @@
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -34,5 +34,26 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+body {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+/* Responsive Styles for Tablets */
+@media only screen and (max-width: 768px) {
+  body {
+    margin-left: 7%;
+    margin-right: 7%; 
+  }
+}
+
+/* Responsive Styles for Mobile */
+@media only screen and (max-width: 480px) {
+  body {
+    margin-left: 2%;
+    margin-right: 2%; 
   }
 }

@@ -4,14 +4,21 @@ import config from '../../config';
 
 const apiUrl = config.apiUrl;
 
-const ImageComponent = () => {
+// const ImageComponent = React.memo(({ imageUrl }) => (
+//   <img src={imageUrl} alt="Your Image" />
+// ));
+
+
+const ImageComponent = React.memo(({uuid}) => {
   const [imageUrl, setImageUrl] = useState('');
 
   useEffect(() => {
     const fetchImage = async () => {
       try {
+        console.log(`uuid is ${uuid}`);
+        console.log(uuid);
         console.log("use effect called in ImageComponent");
-        const response = await fetch('http://localhost:8080/FetchImage/12345uuid');
+        const response = await fetch(`http://localhost:8080/FetchImage/${uuid}`);
         const blob = await response.blob();
 
         // Create a data URL from the blob
@@ -31,6 +38,6 @@ const ImageComponent = () => {
       {imageUrl && <img src={imageUrl} alt="GCS Image" style={{ maxWidth: '100%' }} />}
     </div>
   );
-};
+});
 
 export default ImageComponent;

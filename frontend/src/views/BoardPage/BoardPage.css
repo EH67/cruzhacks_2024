@@ -1,0 +1,12 @@
+.logo-img {
+    width: auto;
+    height: 10%;
+    max-height: 20em; /*Adjust the max-height as needed */
+  }
+  
+  @media (max-width: 768px) {
+    .logo-img {
+      /* max-height: 70px; Adjust the max-height for larger screens */
+    }
+  }
+  

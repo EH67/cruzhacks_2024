@@ -3,9 +3,9 @@ import config from '../../config';
 
 const apiUrl = config.apiUrl;
 
-const DropDown = () => {
-  const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState('');
+const DropDown = ({options, setOptions,selectedOption, setSelectedOption}) => {
+  // const [options, setOptions] = useState([]);
+  // const [selectedOption, setSelectedOption] = useState(null);
   
   useEffect(() => {
     // Fetch options from the API
@@ -14,8 +14,8 @@ const DropDown = () => {
         const response = await fetch(apiUrl + '/AllClubs'); // Replace with your API endpoint
         const data = await response.json();
         setOptions(data['clubs']);
-        console.log("All Clubs: ");
-        console.log(data);
+        // console.log("All Clubs: ");
+        // console.log(data);
       } catch (error) {
         console.error('Error fetching options:', error);
       }
@@ -26,7 +26,7 @@ const DropDown = () => {
 
   const handleDropdownChange = (e) => {
     const newSelectedOption = e.target.value;
-    // setSelectedOption(newSelectedOption);
+    setSelectedOption(newSelectedOption);
 
     // Call the callback function to pass the selected option to the parent
     // onSelectedOptionChange(newSelectedOption);
