@@ -31,7 +31,7 @@ export default class EventPage extends React.Component { // replace "EventPage" 
         {/* <div className="text-lefts p-6 m-6"> */}
           <div>
             <h1>Upload Your Event</h1>
-            <p>Add you poster, flyer, picture, or social media post here.</p>
+            <p>Add your poster, flyer, picture, or social media post here.</p>
             <div>
               <Event uuid={this.generateUuid()}/>
               
