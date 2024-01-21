@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import './EventPage.css'; // replace "EventPage" with your own component
 import Event from './Event/Event';
 import CheckBox from '../../components/CheckBox/CheckBox';
-
+import ImageUpload from '../../components/ImageUpload/ImageUpload';
 export default class EventPage extends React.Component { // replace "EventPage" with your own component
   static propTypes = { // define any props here
     name: PropTypes.string,
@@ -20,9 +20,11 @@ export default class EventPage extends React.Component { // replace "EventPage" 
           <button type="submit">Submit</button>
         </form> */}
         <div>
-          <h1>New Event</h1>
+          <h1>Upload Your Event</h1>
+          <p>Add you poster, flyer, picture, or social media post here.</p>
           <div>
             <Event/>
+            
             {/* <CheckBox/> */}
           </div>
         </div>

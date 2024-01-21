@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import ImageUpload from '../../../components/ImageUpload/ImageUpload';
+// PARENT
 const Event = () => {
   const [formData, setFormData] = useState({
     eventname: '',
     date: '',
     location: '',
     tags: [],
+    filename: '',
   });
 
   const [allTags] = useState([
@@ -17,6 +19,8 @@ const Event = () => {
     "Workshop",
     "Leisure",
   ]);
+
+  const [getImg, setImg] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -40,9 +44,18 @@ const Event = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
 
     try {
       const apiUrl = 'http://localhost:8080/UploadEventJson/test_uuid'; // Replace with your API endpoint
+
+      // Ensure getImg is not null before proceeding
+    if (getImg) {
+      // Update formData with the filename from getImg
+      setFormData((prevData) => ({
+        ...prevData,
+        filename: getImg.name,
+    }))};
 
       // Convert form data to JSON
       const jsonData = JSON.stringify(formData);
@@ -91,7 +104,8 @@ const Event = () => {
         ))}
       </label>
       <br />
-
+      <i class="fas fa-upload"></i> 
+      <ImageUpload selectedImage={getImg} setSelectedImage={setImg}/>
       <button type="submit">Submit</button>
     </form>
   );

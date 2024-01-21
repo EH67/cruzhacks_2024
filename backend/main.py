@@ -125,7 +125,10 @@ def upload_event_json_post(uuid):
                 res_json[col] = data[col]
 
         # assemble flyer link
-        flyer = f'gs://{bucket_name}/{uuid}.png'
+        if 'file' not in data:
+            flyer = f'gs://{bucket_name}/{uuid}.png'
+        else:
+            flyer = f'gs://{bucket_name}/{data["file"]}'
         res_json['flyer'] = flyer
 
         # TODO upload to firebase (uuid as the document)
