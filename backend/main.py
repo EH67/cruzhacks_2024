@@ -108,21 +108,28 @@ def upload_event_json_post(uuid):
     try:
         data = request.get_json(force=True)
         
+        res_json = {} # make a new json to write to db to get rid of junk from data
+
         # if tags is not in json, add 1
         if 'tags' not in data:
-            data['tags'] = []
+            res_json['tags'] = []
+        else:
+            res_json['tags'] = data['tags']
 
         # add the rest of the columns if they don't exist yet
         columns = ['club_or_affiliation', 'eventname', 'date', 'time', 'flyer', 'social_link', 'location']
         for col in columns:
             if col not in data:
-                data[col] = None
+                res_json[col] = None
+            else:
+                res_json[col] = data[col]
 
         # assemble flyer link
-        data['flyer'] = 'gs://'
+        flyer = f'gs://{bucket_name}/{uuid}.png'
+        res_json['flyer'] = flyer
 
         # TODO upload to firebase (uuid as the document)
-        create_event_to_firebase('events', uuid, data)
+        create_event_to_firebase('events', uuid, res_json)
 
         # return at the very least the uuid (see if that's posisble to get)
         return data, 200
@@ -167,16 +174,17 @@ def all_clubs_get():
 @app.route('/QueryEvent', methods=['POST'])
 def query_event_post():
     data = request.get_json(force=True)
-    clubs_ref = firestore.client().collection('club_or_affiliation')
+    clubs_ref = firestore.client().collection('events')
     selected = []
     # strs = []
     count = 0
     # return data  # returns key:value pair 'club_or_affiliation': tsa, acpc, abc
     print('before entering for loop')
     for club in data:
-        return club
-        query = clubs_ref.where('name', '==', club).stream()
-        # strs = [str(item) for item in query]
+        # return club  # returns 'club_or_affiliation'
+        query = clubs_ref.where('club_or_affiliation', '==', 'club_or_affiliation').get()
+        return f"query is {query}"
+        # strs = [str(item)
         for event in query:
             count += 1
             print(f'Number of times in loop: {count}')

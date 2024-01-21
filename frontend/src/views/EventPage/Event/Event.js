@@ -1,75 +1,60 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-class Event extends React.Component {
-  static propTypes = {
-    name: PropTypes.string,
+const Event = () => {
+  const [formData, setFormData] = useState({
+    eventname: '',
+    email: '',
+    // Add more form fields as needed
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  constructor(props) {
-    super(props);
-    // Create a ref for the form element
-    this.formRef = React.createRef();
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  // convert the form to JSON
-  getFormJSON = (form) => {
-    const data = new FormData(form);
-    return Array.from(data.keys()).reduce((result, key) => {
-      result[key] = data.get(key);
-      return result;
-    }, {});
-  };
+    try {
+      const apiUrl = 'http://localhost:8080/UploadEventJson/test_uuid'; // Replace with your API endpoint
 
-  // handle the form submission event, prevent default form behavior, check validity, convert form to JSON
-  handler = (event) => {
-    event.preventDefault();
-    const formElement = this.formRef.current;
-    const valid = formElement.reportValidity();
-    if (valid) {
-      const result = this.getFormJSON(formElement);
-      console.log(result);
+      // Convert form data to JSON
+      const jsonData = JSON.stringify(formData);
+
+      // Send JSON data to the API using Axios
+      const response = await axios.post(apiUrl, jsonData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log('API Response:', response.data);
+    } catch (error) {
+      console.error('Error sending data to API:', error);
     }
   };
 
-  componentDidMount() {
-    // add the event listener in componentDidMount
-    this.formRef.current.addEventListener("submit", this.handler);
-  }
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Event Nameeee:
+        <input type="text" name="eventname" value={formData.eventname} onChange={handleChange} />
+      </label>
 
-  componentDidUpdate(prevProps, prevState) {
-    // clean up the event listener if form element changes
-    if (this.formRef.current !== prevProps.formElement) {
-      this.formRef.current.removeEventListener("submit", this.handler);
-      this.formRef.current.addEventListener("submit", this.handler);
-    }
-  }
+      <label>
+        Email:
+        <input type="email" name="email" value={formData.email} onChange={handleChange} />
+      </label>
 
-  componentWillUnmount() {
-    // remove the event listener in componentWillUnmount to avoid memory leaks
-    this.formRef.current.removeEventListener("submit", this.handler);
-  }
+      {/* Add more form fields as needed */}
 
-  render() {
-    return (
-      <div className="Event">
-        {/* Attach the ref to the form element */}
-        <form ref={this.formRef}>
-          <p>
-            <label htmlFor="name">Event Name</label>
-            <input type="text" name="name" id="name" />
-          </p>
-          <p>
-            <label htmlFor="email">Email</label>
-            <input type="email" name="email" id="email" />
-          </p>
-          <button type="submit">Submit</button>
-        </form>
-        {/* <ImageComponent/> */}
-      </div>
-    );
-  }
-}
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
 
 export default Event;
-

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const NewNewEvent = () => {
+const Event = () => {
   const [formData, setFormData] = useState({
-    username: '',
+    eventname: '',
     email: '',
     // Add more form fields as needed
   });
@@ -41,8 +41,8 @@ const NewNewEvent = () => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Username:
-        <input type="text" name="username" value={formData.username} onChange={handleChange} />
+        Event Name:
+        <input type="text" name="eventname" value={formData.eventname} onChange={handleChange} />
       </label>
 
       <label>
@@ -57,4 +57,4 @@ const NewNewEvent = () => {
   );
 };
 
-export default NewNewEvent;
+export default Event;
