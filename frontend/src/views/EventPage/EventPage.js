@@ -2,8 +2,6 @@ import React from "react";
 import PropTypes from "prop-types"; 
 import './EventPage.css'; // replace "EventPage" with your own component
 import Event from './Event/Event';
-import CheckBox from '../../components/CheckBox/CheckBox';
-import ImageUpload from '../../components/ImageUpload/ImageUpload';
 import { v4 as uuidv4 } from 'uuid';
 import './EventPage.css';
 import {Link} from 'react-router-dom';
@@ -16,6 +14,8 @@ export default class EventPage extends React.Component { // replace "EventPage" 
   generateUuid = () => {
     return uuidv4();
   };
+
+  
 
   render() {
     return (
@@ -36,6 +36,7 @@ export default class EventPage extends React.Component { // replace "EventPage" 
               {/* <CheckBox/> */}
             </div>
             <Link to="/BoardPage">GO BACK TO SLUG BOARD</Link>
+            {/* <HomeButton/> */}
           </div>
         </div>
     );

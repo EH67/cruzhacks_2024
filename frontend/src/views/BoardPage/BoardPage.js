@@ -44,13 +44,23 @@ const BoardPage = () => {
   return (
     <div>
       {/* <!-- Image and text --> */}
-      <nav class="navbar navbar-dark bg-dark py-3 py-lg-5">
-        <a class="navbar-brand d-flex align-items-center" href="#">
-          <img src='/slug_logo.png'class="" alt="slug logo"></img>
-          <span class="h2 ml-2">Slug Board</span>
-        </a>
-      </nav>
-      <Link to="/EventPage">ADD NEW EVENT</Link>
+      {/* horizontal row */}
+      <div className="sticky-top py-1 py-lg-3" >
+        <div className="container" style={{ backgroundColor: '#003E70' }}>
+
+          <div className="row d-flex align-items-center" >
+            <div className="col-sm float-right">
+              <img src="/slug_logo.png" className="logo-img" height="150px" alt="Slug Logo"></img>
+            </div>
+            <div className="col-sm float-left">
+              <span className="h1 ml-2 text-left text-light">Slug Board</span>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {/* thick padding on left and right */}
       <div>
         { jsonData && Object.entries(jsonData).map(([uuid, entry]) => (
           // <Flyer key={uuid} data={{uuid, ...entry}} />
@@ -59,6 +69,7 @@ const BoardPage = () => {
         )) }
       </div>
       <div>
+        <Link to="/EventPage">ADD NEW EVENT</Link>
           
       </div>
       {/* Add your content for the Board component */}

@@ -117,6 +117,8 @@ const Event = ({uuid}) => {
         return alert('empty image');
       };
 
+      uploadFile(getImg);
+
       // Convert form data to JSON
       // const jsonData = JSON.stringify(formData);
       const jsonData = JSON.stringify({
@@ -135,12 +137,14 @@ const Event = ({uuid}) => {
 
       console.log('API Response:', response.data);
 
-      uploadFile(getImg);
-
+      
+      window.location.href = '/BoardPage';
     } catch (error) {
       console.error('Error sending data to API:', error);
     }
   };
+
+
 
   return (
     <form onSubmit={handleSubmit}>

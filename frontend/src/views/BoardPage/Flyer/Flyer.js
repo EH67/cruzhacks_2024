@@ -20,10 +20,9 @@ const Flyer = ({uuid, data}) => {
 
   return (
     <div>
-      <h2>Flyer</h2>
+      
       {/* <ImageComponent uuid={hardcoded_json.uuid}/> */}
       <ImageComponent uuid={uuid}/>
-      
     </div>
   );
 };
