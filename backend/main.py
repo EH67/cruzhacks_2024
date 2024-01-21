@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request, send_file
 from google.cloud import storage
 import io
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app) #enables CORS for all routes
 
 import firebase_admin
 from firebase_admin import credentials
@@ -167,11 +169,17 @@ def query_event_post():
     data = request.get_json(force=True)
     clubs_ref = firestore.client().collection('club_or_affiliation')
     selected = []
-    result_strings = []
-
+    # strs = []
+    count = 0
+    # return data  # returns key:value pair 'club_or_affiliation': tsa, acpc, abc
+    print('before entering for loop')
     for club in data:
+        return club
         query = clubs_ref.where('name', '==', club).stream()
+        # strs = [str(item) for item in query]
         for event in query:
+            count += 1
+            print(f'Number of times in loop: {count}')
             selected.append(event)  # check
 
     if not selected:

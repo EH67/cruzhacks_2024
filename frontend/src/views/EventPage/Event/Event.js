@@ -1,32 +1,75 @@
-import React from "react";
-import PropTypes from "prop-types"; 
-import testFlyer from './testFlyer.svg'; // FIXreplace "Event" with your own component
-import ImageComponent from "../../../components/ImageComponent/ImageComponent";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-export default class Event extends React.Component { // replace "Event" with your own component
-  static propTypes = { // define any props here
+class Event extends React.Component {
+  static propTypes = {
     name: PropTypes.string,
   };
 
+  constructor(props) {
+    super(props);
+    // Create a ref for the form element
+    this.formRef = React.createRef();
+  }
+
+  // convert the form to JSON
+  getFormJSON = (form) => {
+    const data = new FormData(form);
+    return Array.from(data.keys()).reduce((result, key) => {
+      result[key] = data.get(key);
+      return result;
+    }, {});
+  };
+
+  // handle the form submission event, prevent default form behavior, check validity, convert form to JSON
+  handler = (event) => {
+    event.preventDefault();
+    const formElement = this.formRef.current;
+    const valid = formElement.reportValidity();
+    if (valid) {
+      const result = this.getFormJSON(formElement);
+      console.log(result);
+    }
+  };
+
+  componentDidMount() {
+    // add the event listener in componentDidMount
+    this.formRef.current.addEventListener("submit", this.handler);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    // clean up the event listener if form element changes
+    if (this.formRef.current !== prevProps.formElement) {
+      this.formRef.current.removeEventListener("submit", this.handler);
+      this.formRef.current.addEventListener("submit", this.handler);
+    }
+  }
+
+  componentWillUnmount() {
+    // remove the event listener in componentWillUnmount to avoid memory leaks
+    this.formRef.current.removeEventListener("submit", this.handler);
+  }
+
   render() {
     return (
-    <div className="Event">
-
-      {/* <img className="Event-img" src={testFlyer} alt="Music Poster"/> */
-          <form>
+      <div className="Event">
+        {/* Attach the ref to the form element */}
+        <form ref={this.formRef}>
           <p>
-              <label for="name">Event Name</label>
-              <input type="text" name="name" id="name" />
+            <label htmlFor="name">Event Name</label>
+            <input type="text" name="name" id="name" />
           </p>
           <p>
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" />
+            <label htmlFor="email">Email</label>
+            <input type="email" name="email" id="email" />
           </p>
           <button type="submit">Submit</button>
-          </form>
-      }
-      <ImageComponent/>
-    </div>
+        </form>
+        {/* <ImageComponent/> */}
+      </div>
     );
   }
 }
+
+export default Event;
+

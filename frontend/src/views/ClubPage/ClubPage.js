@@ -16,7 +16,7 @@ export default class ClubPage extends React.Component { // replace "Club" with y
         <ImageComponent/>
       </div>
       <div>
-      <Event/>
+        under image component
       </div>
     </div>
     );
