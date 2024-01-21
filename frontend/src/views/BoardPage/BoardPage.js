@@ -4,6 +4,7 @@ import axios from 'axios';
 import slug_logo from '../../images/slug_logo.svg';
 import {Link} from 'react-router-dom';
 import './BoardPage.css';
+import Popup from '../../components/Popup/Popup';
 
 
 const BoardPage = () => {
@@ -68,10 +69,6 @@ const BoardPage = () => {
           <Flyer className="flyer-div" key={index} uuid={entry && entry.uuid} data={entry}/>
         )) }
       </div>
-      <div>
-          
-      </div>
-      {/* Add your content for the Board component */}
     </div>
   );
 };

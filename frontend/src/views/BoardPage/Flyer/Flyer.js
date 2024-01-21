@@ -21,11 +21,6 @@ const Flyer = ({uuid, data}) => {
           
     };
 
-    const handleButtonClick = () => {
-        console.log('Button clicked!');
-        // Add your logic here
-      };
-
   return (
     <div>
       {/* <div>FLYER</div> */}

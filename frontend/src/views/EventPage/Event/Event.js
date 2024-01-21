@@ -250,8 +250,22 @@ const Event = ({uuid}) => {
             <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#003E70' }} onClick={handleOpenPopup}>Submit</button>
             {isPopupOpen && (
               <Popup onClose={handleClosePopup}>
-                <p>This is the content of the popup.</p>
-              </Popup>
+              <div class="text-center">
+                <img
+                  src="/slug_logo.png"
+                  className={isPopupOpen ? 'slug-animated' : ''}
+                  height="400vm"
+                  animation-name="wiggle"
+                  animation-duration="infinite"
+                  alt="Slug Logo"
+                />
+                <p>Thank you for sharing an Event. </p>
+                <p>Close popup to see newest selection of events.</p>  
+                <br />
+                <br />
+                <p>The Banana Slug of the Board says 💙 you!</p>  
+              </div>
+            </Popup>
             )}
           </div>
         </div>

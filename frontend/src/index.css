@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+img:hover {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 2.0s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: 3;
+}
+
+@keyframes wobble {
+  0% { transform: translate(0.0px, 0.5px) rotate(0deg); }
+  30% { transform: translate(0.5px, 0.5px) rotate(0deg); }
+  60% { transform: translate(0.5px, 0px) rotate(0deg); }
+  90% { transform: translate(0px, -0.5px) rotate(0deg); }
+}
