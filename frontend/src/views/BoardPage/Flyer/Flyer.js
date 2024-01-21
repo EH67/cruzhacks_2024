@@ -1,5 +1,7 @@
 import React from 'react';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
+import config from '../../../config';
+const apiUrl = config.apiUrl;
 
 const Flyer = ({uuid, data}) => {
     const hardcoded_json = {
@@ -7,7 +9,7 @@ const Flyer = ({uuid, data}) => {
         "date": "1",
         "eventname": "1",
         "filename": "zero waste_sustainability office_2022.png",
-        "flyer": "gs://cruzhack-24.appspot.com/bc11f326-5258-4ae1-831d-3188969f74f1.png",
+        "flyer": `gs://bucket/bc11f326-5258-4ae1-831d-3188969f74f1.png`,
         "location": "1",
         "social_link": null,
         "tags": [],

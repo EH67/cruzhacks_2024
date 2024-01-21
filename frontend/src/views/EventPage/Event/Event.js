@@ -23,6 +23,10 @@ const Event = ({uuid}) => {
     "Indoor",
     "Workshop",
     "Leisure",
+    "Culture",
+    "Fitness",
+    "Academics",
+    "Music"
   ]);
 
   const [getImg, setImg] = useState(null);

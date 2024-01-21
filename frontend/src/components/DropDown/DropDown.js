@@ -34,9 +34,7 @@ const DropDown = ({options, setOptions,selectedOption, setSelectedOption}) => {
 
   return (
     <div>
-      <h2>Dropdown with API Options</h2>
       <label>
-        Select an option:
         <select value={selectedOption} onChange={handleDropdownChange}>
           <option value="">-- Select --</option>
           {options.map((club, index) => (
@@ -47,7 +45,6 @@ const DropDown = ({options, setOptions,selectedOption, setSelectedOption}) => {
         </select>
       </label>
 
-      <p>Selected option: {selectedOption}</p>
     </div>
   );
 };

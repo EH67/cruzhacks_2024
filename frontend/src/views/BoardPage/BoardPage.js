@@ -13,27 +13,27 @@ const BoardPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:8080/AllEvents'); // Replace with your API endpoint
+        const response = await fetch('http://localhost:8080/NewAllEvents'); // Replace with your API endpoint
         const data = await response.json();
-        setJsonData(data);
+        setJsonData(data.events);
         console.log("data is ");
-        console.log(jsonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    const fetchData2 = async () => {
-      try {
-        const response = await fetch('http://localhost:8080/AllEventNames'); // Replace with your API endpoint
-        const data = await response.json();
-        setEventNames(data);
-        console.log("data2 is ");
         console.log(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-    fetchData2();
+    // const fetchData2 = async () => {
+    //   try {
+    //     const response = await fetch('http://localhost:8080/AllEventNames'); // Replace with your API endpoint
+    //     const data = await response.json();
+    //     setEventNames(data);
+    //     console.log("data2 is ");
+    //     console.log(data);
+    //   } catch (error) {
+    //     console.error('Error fetching data:', error);
+    //   }
+    // };
+    // fetchData2();
     fetchData();
   },[]); // The empty dependency array ensures this effect runs only once after the initial render
 
@@ -44,31 +44,32 @@ const BoardPage = () => {
   // }));
   return (
     <div>
-      {/* <!-- Image and text --> */}
-      {/* horizontal row */}
-      <div className="sticky-top py-1 py-lg-3" >
-        <div className="container" style={{ backgroundColor: '#003E70' }}>
+      {/* Navbar */}
+      <div className="sticky-top rounded-30 py-0 py-lg-1" style={{ backgroundColor: '#003E70' }} >
+        <div className="container rounded-30">
 
-          <div className="row d-flex align-items-center" >
-            <div className="col float-right">
+          <div className="row d-flex align-items-center rounded-10">
+            <div className="col float-right pl-5">
               <img src="/slug_logo.png" className="logo-img" height="150px" alt="Slug Logo"></img>
             </div>
-            <div className="col float-center">
-              <span className="h1 ml-2 text-left text-light">Slug Board</span>
+            <div className="col float-left">
+              <span className="h1 ml-2 text-left text-light title-name" font-size="large">Slug Board</span>
             </div>
-            <div className="col float-right text-end">
-              <Link to="/EventPage">ADD NEW EVENT</Link>
+            <div className="ml-auto pr-5 mr-5">
+              <Link to="/EventPage" className="btn btn-light">Add Event</Link>
             </div>
+          </div>
+          <div className="row text-center">
+            <p>Slugs for the fun! Stay up to date on upcoming events!</p>
           </div>
           
         </div>
       </div>
 
-      {/* thick padding on left and right */}
       <div className="all-flyers-div">
-        { jsonData && Object.entries(jsonData).map(([uuid, entry]) => (
+        { jsonData && Object.entries(jsonData).map(([index, entry]) => (
           // <Flyer key={uuid} data={{uuid, ...entry}} />
-          <Flyer className="flyer-div" key={uuid} uuid={uuid} data={entry}/>
+          <Flyer className="flyer-div" key={index} uuid={entry && entry.uuid} data={entry}/>
 
         )) }
       </div>

@@ -188,6 +188,23 @@ def all_events_get():
     events = get_all_documents('events')
     return events, 200
 
+@app.route('/NewAllEvents', methods=['GET'])
+def new_all_events_get():
+    events = get_all_documents('events')
+    events_with_local_image = []
+    events_with_gcs_image = []
+    for x in events:
+        # print(f'x is {x}')
+        events[x]['uuid'] = x
+        if 'gs://' in events[x]['flyer']:
+            events_with_gcs_image.append(events[x])
+        else:
+            events_with_local_image.append(events[x])
+
+    events_sorted_list = events_with_local_image + events_with_gcs_image    
+    
+    return {'events': events_sorted_list}, 200
+
 @app.route('/AllEventNames', methods=['GET'])
 def all_event_names_get():
     event_names = get_all_document_names('events')

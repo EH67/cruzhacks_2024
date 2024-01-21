@@ -13,7 +13,7 @@ def test_upload_event():
             "eventname": "Boba making",
             "date": "1/19/2024",
             "time": "15:00",
-            "flyer": "gs://cruzhack-24.appspot.com/graph.png",
+            "flyer": "gs://BUCKET/graph.png",
             "social_link": "insta/discord",
             "location": "C9 Community Room",
             "tags": ["tag 1", "tag2"]

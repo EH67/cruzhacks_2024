@@ -14,6 +14,17 @@
         height: 10px;
     }
   }
+.title-name {
+    text-size-adjust: auto;
+  }
+  
+  @media (max-width: 768px) {
+
+  }
+
+  @media (max-width: 480) {
+
+  }
 
   .all-flyers-div {
     display: grid;
