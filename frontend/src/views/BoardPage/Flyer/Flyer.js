@@ -2,6 +2,7 @@ import React from 'react';
 import ImageComponent from '../../../components/ImageComponent/ImageComponent';
 import config from '../../../config';
 const apiUrl = config.apiUrl;
+// import {Link} from 'react-router-dom';
 
 const Flyer = ({uuid, data}) => {
     const hardcoded_json = {
@@ -20,11 +21,18 @@ const Flyer = ({uuid, data}) => {
           
     };
 
+    const handleButtonClick = () => {
+        console.log('Button clicked!');
+        // Add your logic here
+      };
+
   return (
     <div>
-      
+      {/* <div>FLYER</div> */}
       {/* <ImageComponent uuid={hardcoded_json.uuid}/> */}
-      <ImageComponent uuid={uuid} flyer={data.flyer}/>
+      <a href={data && data.insta && data.insta} target="_blank" rel="noopener noreferrer">
+        <ImageComponent uuid={uuid} flyer={data.flyer}/>
+      </a>
     </div>
   );
 };

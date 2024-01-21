@@ -1,32 +1,41 @@
 .logo-img {
-    height: 150px;
+    height: 100px;
     width: auto;
+    margin-top: -50px;
   }
   
   @media (max-width: 768px) {
     .logo-img {
         height: 50px;
+        margin-top: -25px;
     }
   }
 
-  @media (max-width: 480) {
+  @media (max-width: 480px) {
     .logo-img {
-        height: 10px;
+        height: 100px;
+        margin-top: 10px;
     }
   }
+
 .title-name {
     font-size: large;
-    text-size-adjust: auto;
   }
   
   @media (max-width: 768px) {
+    .title-name {
+        font-size: medium;
+      }
 
   }
 
-  @media (max-width: 480) {
+  @media (max-width: 480px) {
+    .title-name {
+        font-size: small;
+      }
 
   }
-
+  
   .all-flyers-div {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(30%, 1fr)); /* Adjust column width as needed */
@@ -36,5 +45,10 @@
   .flyer-div {
     border: 1px solid #ddd; /* Optional: Add a border for each item */
     padding: 2em; /* Adjust padding as needed */
+  }
+
+  
+  .all-flyers-div::before {
+    content: none;
   }
   

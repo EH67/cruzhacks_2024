@@ -19,7 +19,7 @@ export default class EventPage extends React.Component { // replace "EventPage" 
 
   render() {
     return (
-    <div className="cards text-lefts px-9 mx-24">
+    <div className="cards container text-lefts px-9 mx-24">
       {/* add padding */}
         {/* <form>
           <label htmlFor="email">Email</label>
@@ -35,12 +35,19 @@ export default class EventPage extends React.Component { // replace "EventPage" 
               
               {/* <CheckBox/> */}
             </div>
+            
+            <div>
+
             {/* <Link to="/BoardPage">GO BACK TO SLUG BOARD</Link> */}
-            <Link to="/BoardPage" className="btn btn-light">
-              <i className="fas fa-arrow-left ml-2"></i>
-              Return to SlugsBoard
-            </Link>
+            <div className="my-1">
+              <Link to="/BoardPage" className="btn btn-light p-3">
+                <i className="fas fa-arrow-left ml-2"></i>
+                Return to Slug Board
+              </Link>
+            </div>
             {/* <HomeButton/> */}
+              
+            </div>
           </div>
         </div>
     );

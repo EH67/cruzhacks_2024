@@ -158,10 +158,10 @@ const Event = ({uuid}) => {
       <div className="row">
         {/* column one starts here> */}
         {/*  align-items-center ceters it vertically */}
-        <div className="col-md-6 pb-5 d-flex justify-content-between align-items-center">
+        <div className="col d-flex justify-content-between align-items-center">
           {/* grey rectangle */}
-          <div className="card rounded-20 p-3" width="100%" style={{ backgroundColor: '#D9D9D9' }}>
-            <div className="card-body p-3 pt-5 mt-5">
+          <div className="card rounded-20 pt-3" width="100%" style={{ backgroundColor: '#D9D9D9' }}>
+            <div className="card-body pt-5 mt-5">
               <ImageUpload selectedImage={getImg} setSelectedImage={setImg} uuid={uuid}/>
             <br />
             <br />
@@ -217,8 +217,9 @@ const Event = ({uuid}) => {
             ))}
           </div>
           <br />
-
-          <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#003E70' }}>Submit</button>
+          <div className="">
+            <button type="submit" className="btn btn-primary" style={{ backgroundColor: '#003E70' }}>Submit</button>
+          </div>
         </div>
 
       </div>

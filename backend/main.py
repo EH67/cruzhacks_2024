@@ -107,6 +107,25 @@ def get_all_documents(collection_name):
     documents_json = {x.id: x.to_dict() for x in documents}
     return documents_json
 
+
+def get_firestore_document(collection_name, document_name):
+    # Initialize Firestore client
+    db = firestore.Client()
+
+    # Construct the reference to the document
+    doc_ref = db.collection(collection_name).document(document_name)
+
+    # Get the document snapshot
+    doc_snapshot = doc_ref.get()
+
+    # Check if the document exists
+    if doc_snapshot.exists:
+        # Return the document data
+        return doc_snapshot.to_dict()
+    else:
+        print(f"Document '{document_name}' not found in collection '{collection_name}'.")
+        return None
+
 @app.route('/')
 def hello_world():
     return jsonify(message='Hello, World!')
@@ -193,9 +212,25 @@ def new_all_events_get():
     events = get_all_documents('events')
     events_with_local_image = []
     events_with_gcs_image = []
+
+    # get all clubs
+    clubs = get_all_documents('clubs')
+    print(f"clubs are {clubs}")
+
     for x in events:
         # print(f'x is {x}')
         events[x]['uuid'] = x
+        # club_stuff = get_firestore_document('clubs', events[x]['club_or_affiliation'])
+        # if club_stuff:
+        #     events[x]['insta'] = club_stuff['insta']
+        # else:
+        #     events[x]['insta'] = None
+
+        if events[x]['club_or_affiliation']:
+            events[x]['insta'] = clubs[events[x]['club_or_affiliation']]['insta']
+        else:
+            events[x]['insta'] = None
+
         if 'gs://' in events[x]['flyer']:
             events_with_gcs_image.append(events[x])
         else:
@@ -209,6 +244,25 @@ def new_all_events_get():
 def all_event_names_get():
     event_names = get_all_document_names('events')
     return {'events': event_names}
+
+def get_firestore_document(collection_name, document_name):
+    # Initialize Firestore client
+    db = firestore.Client()
+
+    # Construct the reference to the document
+    doc_ref = db.collection(collection_name).document(document_name)
+
+    # Get the document snapshot
+    doc_snapshot = doc_ref.get()
+
+    # Check if the document exists
+    if doc_snapshot.exists:
+        # Return the document data
+        return doc_snapshot.to_dict()
+    else:
+        print(f"Document '{document_name}' not found in collection '{collection_name}'.")
+        return None
+    
 
 @app.route('/QueryEvent', methods=['POST'])
 def query_event_post():

@@ -13,6 +13,7 @@ const BoardPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("inside fetch data");
         const response = await fetch('http://localhost:8080/NewAllEvents'); // Replace with your API endpoint
         const data = await response.json();
         setJsonData(data.events);
@@ -45,36 +46,26 @@ const BoardPage = () => {
   return (
     <div>
       {/* Navbar */}
-      <div className="sticky-top rounded-30 py-0 py-lg-1" style={{ backgroundColor: '#003E70' }} >
-        <div className="container rounded-30">
-
-          {/* row1 */}
-          <div className="row d-flex align-items-center rounded-10">
-            <div className="col float-right pl-5">
-              <img src="/slug_logo.png" className="logo-img" height="150px" alt="Slug Logo"></img>
-            </div>
-            <div className="col float-left">
-              <span className="h1 ml-2 text-left text-light title-name" font-size="large">Slug Board</span>
-            </div>
-            <div className="ml-auto pr-5 mr-5">
-              <Link to="/EventPage" className="btn btn-light">Add Event</Link>
-            </div>
+      <nav className="navbar navbar-expand-lg navbar-dark fixed-top py-1 py-lg-3" style={{ backgroundColor: '#003E70' }}>
+        <div className="container">
+          {/* Left logo */}
+          <Link className="navbar-brand" to="/">
+            <img src="/slug_logo.png" className="logo-img" height="100px" alt="Slug Logo"></img>
+          </Link>
+          {/* Middle name of the website */}
+          <span className="h1 ml-2 text-light" font-family="Kreon">Slug Board</span>
+          {/* Right button */}
+          <div className="ml-auto p-5">
+            <Link to="/EventPage" className="btn btn-light">Add New Event</Link>
           </div>
-
-          {/* row2 */}
-          <div className="row text-center"></div>
-          <div className="row text-center">
-            <span className="p1 text-center text-light title-name" >Slugs for the fun! Stay up to date on upcoming events!</span>
-          </div>
-          <div className="row text-center"></div>
         </div>
-      </div>
+      </nav>
+      
 
-      <div className="all-flyers-div">
+      <div className="all-flyers-div container">
         { jsonData && Object.entries(jsonData).map(([index, entry]) => (
           // <Flyer key={uuid} data={{uuid, ...entry}} />
           <Flyer className="flyer-div" key={index} uuid={entry && entry.uuid} data={entry}/>
-
         )) }
       </div>
       <div>
